@@ -1,0 +1,42 @@
+:root {
+  --beige: #e3e7d3ff;
+  --silver: #bdc2bfff;
+  --grey-olive: #989c94ff;
+  --charcoal-brown: #25291cff;
+  --vanilla-custard: #e6e49fff;
+
+  --background: var(--beige);
+  --foreground: var(--charcoal-brown);
+}
+
+html {
+  height: 100%;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: var(--foreground);
+  background: var(--background);
+  font-family: system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
