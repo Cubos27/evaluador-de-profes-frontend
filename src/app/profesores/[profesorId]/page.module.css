@@ -1,0 +1,116 @@
+.page {
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.header {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.backLink,
+.secondaryLink {
+  text-decoration: none;
+  color: var(--charcoal-brown);
+  font-weight: 700;
+}
+
+.main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.25rem 3rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.hero {
+  background: var(--silver);
+  border: 1px solid var(--grey-olive);
+  border-radius: 14px;
+  padding: 1.25rem;
+}
+
+.kicker {
+  margin: 0;
+  color: var(--charcoal-brown);
+  font-weight: 700;
+}
+
+.name {
+  margin: 0.35rem 0 0;
+  color: var(--charcoal-brown);
+}
+
+.card {
+  background: var(--silver);
+  border: 1px solid var(--grey-olive);
+  border-radius: 14px;
+  padding: 1.25rem;
+}
+
+.sectionTitle {
+  margin: 0 0 1rem;
+  color: var(--charcoal-brown);
+}
+
+.detailsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.6rem 1rem;
+}
+
+.label {
+  font-weight: 700;
+}
+
+.subjectsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
+.subjectItem {
+  border: 1px solid var(--grey-olive);
+  border-radius: 12px;
+  padding: 0.9rem;
+  background: var(--beige);
+}
+
+.subjectItem h3 {
+  margin: 0 0 0.4rem;
+}
+
+.subjectItem p {
+  margin: 0.15rem 0;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.75rem;
+}
+
+.statItem {
+  border-radius: 12px;
+  background: var(--vanilla-custard);
+  border: 1px solid var(--grey-olive);
+  padding: 0.85rem;
+}
+
+.statLabel {
+  margin: 0;
+  color: var(--charcoal-brown);
+  font-size: 0.9rem;
+}
+
+.statValue {
+  margin: 0.35rem 0 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--charcoal-brown);
+}

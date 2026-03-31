@@ -1,0 +1,92 @@
+.page {
+  min-height: 100vh;
+  color: var(--foreground);
+}
+
+.header {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.backLink {
+  color: var(--charcoal-brown);
+  font-weight: 700;
+}
+
+.main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.25rem 2.5rem;
+}
+
+.searchForm {
+  margin-top: 1rem;
+  background: var(--silver);
+  border: 1px solid var(--grey-olive);
+  border-radius: 12px;
+  padding: 0.9rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.searchLabel {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.searchInput {
+  width: 100%;
+  border: 1px solid var(--grey-olive);
+  border-radius: 8px;
+  background: var(--beige);
+  color: var(--charcoal-brown);
+  padding: 0.65rem 0.8rem;
+  font-size: 1rem;
+}
+
+.resultsText {
+  margin: 1rem 0 0.8rem;
+  color: var(--charcoal-brown);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.8rem;
+}
+
+.card {
+  border: 1px solid var(--silver);
+  border-radius: 12px;
+  padding: 0.9rem;
+  background: white;
+}
+
+.name {
+  margin-bottom: 0.35rem;
+}
+
+.meta {
+  color: var(--charcoal-brown);
+  margin-bottom: 0.25rem;
+}
+
+.link {
+  display: inline-block;
+  margin-top: 0.45rem;
+  font-weight: 700;
+  color: var(--charcoal-brown);
+  background: var(--vanilla-custard);
+  border: 1px solid var(--grey-olive);
+  border-radius: 8px;
+  padding: 0.35rem 0.6rem;
+}
+
+.empty {
+  margin-top: 1rem;
+  color: var(--charcoal-brown);
+}
