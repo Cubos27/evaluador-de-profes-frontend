@@ -1,4 +1,7 @@
 import styles from "./page.module.css";
+import Link from "next/link";
+import PrimaryBtn from "@/components/Buttons/primaryBtn";
+import SecondaryBtn from "@/components/Buttons/secondaryBtn";
 import {
   ArrowIcon,
   ChartIcon,
@@ -21,9 +24,13 @@ export default function Home() {
           EvaluaProfe
         </div>
         <nav className={styles.nav}>
-          <a href="#features" className={styles.navLink}>Características</a>
-          <a href="#como-funciona" className={styles.navLink}>Cómo funciona</a>
-          <a href="/evaluar" className={styles.ctaButton}>Comenzar</a>
+          <Link href="#features" className={styles.navLink}>Características</Link>
+          <Link href="#como-funciona" className={styles.navLink}>Cómo funciona</Link>
+          <Link href="/evaluar" className={styles.navLink}>
+            <PrimaryBtn>
+              Comenzar ahora
+            </PrimaryBtn>
+          </Link>
         </nav>
       </header>
 
@@ -36,12 +43,16 @@ export default function Home() {
             Tu retroalimentación ayuda a los profesores a crecer y a crear un mejor ambiente de aprendizaje para todos. Juntos podemos transformar la educación.
           </p>
           <div className={styles.heroCta}>
-            <a href="/evaluar" className={styles.primaryBtn}>
-              Evaluar ahora <ArrowIcon />
-            </a>
-            <a href="#como-funciona" className={styles.secondaryBtn}>
-              Saber más
-            </a>
+            <Link href={'/evaluar'} className={styles.primaryBtn}>
+              <PrimaryBtn>
+                Evaluar ahora <ArrowIcon />
+              </PrimaryBtn>
+            </Link>
+            <Link href={'#como-funciona'} className={styles.secondaryBtn}>
+              <SecondaryBtn>
+                Saber más
+              </SecondaryBtn>
+            </Link>
           </div>
         </div>
         <div className={styles.heroVisual}>
@@ -167,9 +178,11 @@ export default function Home() {
           <p className={styles.ctaText}>
             Cada evaluación contribuye a crear un mejor ambiente de aprendizaje. No subestimes el poder de tu opinión.
           </p>
-          <a href="/evaluar" className={styles.ctaBtn}>
-            <PencilIcon /> Comenzar evaluación
-          </a>
+          <Link href="/evaluar" className={styles.linkBtn}>
+            <PrimaryBtn>
+              <PencilIcon /> &ensp;Comenzar evaluación
+            </PrimaryBtn>
+          </Link>
         </div>
       </section>
 

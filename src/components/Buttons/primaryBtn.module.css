@@ -1,0 +1,19 @@
+.primaryBtn {
+  background: var(--charcoal-brown);
+  color: var(--vanilla-custard);
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 18px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  /* gap: 8px; */
+  cursor: pointer;
+  border: none;
+}
+
+.primaryBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(37, 41, 28, 0.4);
+}

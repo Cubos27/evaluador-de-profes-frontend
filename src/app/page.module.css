@@ -50,25 +50,12 @@
 .navLink {
   font-weight: 500;
   color: var(--charcoal-brown);
-  transition: opacity 0.2s;
+  transition: all ease-in-out 0.2s;
 }
 
 .navLink:hover {
-  opacity: 0.7;
-}
-
-.ctaButton {
-  background: var(--charcoal-brown);
-  color: #ffffff;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.ctaButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(37, 41, 28, 0.3);
+  color: var(--vanilla-custard);
+  /* opacity: 0.7; */
 }
 
 .hero {
@@ -112,40 +99,6 @@
 .heroCta {
   display: flex;
   gap: 16px;
-}
-
-.primaryBtn {
-  background: var(--charcoal-brown);
-  color: var(--vanilla-custard);
-  padding: 16px 32px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 18px;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.primaryBtn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(37, 41, 28, 0.4);
-}
-
-.secondaryBtn {
-  background: transparent;
-  color: var(--charcoal-brown);
-  padding: 16px 32px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 18px;
-  border: 2px solid var(--charcoal-brown);
-  transition: all 0.2s;
-}
-
-.secondaryBtn:hover {
-  background: var(--charcoal-brown);
-  color: #ffffff;
 }
 
 .heroVisual {
@@ -380,22 +333,11 @@
   line-height: 1.6;
 }
 
-.ctaBtn {
-  background: var(--charcoal-brown);
-  color: var(--vanilla-custard);
-  padding: 20px 48px;
-  border-radius: 16px;
-  font-weight: 600;
-  font-size: 20px;
-  transition: all 0.2s;
+.linkBtn {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-}
-
-.ctaBtn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 32px rgba(37, 41, 28, 0.3);
+  gap: 8px;
+  text-decoration: none;
 }
 
 .footer {

@@ -1,0 +1,16 @@
+.secondaryBtn {
+  background: transparent;
+  color: var(--charcoal-brown);
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 18px;
+  border: 2px solid var(--charcoal-brown);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.secondaryBtn:hover {
+  background: var(--charcoal-brown);
+  color: #ffffff;
+}
