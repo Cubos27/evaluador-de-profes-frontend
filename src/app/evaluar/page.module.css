@@ -82,6 +82,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  position: relative;
 }
 
 .label {
@@ -91,6 +92,8 @@
 }
 
 .select {
+  width: 100%;
+  box-sizing: border-box;
   padding: 16px 20px;
   border: 2px solid var(--silver);
   border-radius: 12px;
@@ -117,6 +120,51 @@
   background-color: var(--beige);
   cursor: not-allowed;
   opacity: 0.7;
+}
+
+.comboboxWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.comboboxList {
+  position: absolute;
+  z-index: 30;
+  width: 100%;
+  box-sizing: border-box;
+  list-style: none;
+  margin: 6px 0 0 0;
+  max-height: 240px;
+  overflow-y: auto;
+  border: 1px solid var(--silver);
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(37, 41, 28, 0.15);
+  padding: 6px;
+}
+
+.comboboxOption {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: var(--charcoal-brown);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.comboboxOption:hover,
+.comboboxOptionActive {
+  background: var(--beige);
+}
+
+.comboboxEmpty {
+  color: var(--grey-olive);
+  font-size: 14px;
+  padding: 10px 12px;
 }
 
 .questionsSection {

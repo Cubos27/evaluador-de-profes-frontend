@@ -120,9 +120,117 @@ const questions = [
   },
 ];
 
+function Combobox({
+  id,
+  value,
+  onValueChange,
+  options,
+  onSelect,
+  placeholder,
+  disabled = false,
+  noResultsText = "Sin resultados",
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleKeyDown = (e) => {
+    if (!isOpen && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
+      setIsOpen(true);
+      return;
+    }
+
+    if (!options.length) {
+      if (e.key === "Escape") {
+        setIsOpen(false);
+      }
+      return;
+    }
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setActiveIndex((prev) => (prev + 1) % options.length);
+    }
+
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setActiveIndex((prev) => (prev - 1 + options.length) % options.length);
+    }
+
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const option = options[activeIndex];
+      if (option) {
+        onSelect(option);
+        setIsOpen(false);
+      }
+    }
+
+    if (e.key === "Escape") {
+      setIsOpen(false);
+    }
+  };
+
+  return (
+    <div className={styles.comboboxWrapper}>
+      <input
+        id={id}
+        className={styles.select}
+        type="text"
+        value={value}
+        placeholder={placeholder}
+        disabled={disabled}
+        role="combobox"
+        aria-expanded={isOpen}
+        aria-controls={`${id}-listbox`}
+        aria-autocomplete="list"
+        onFocus={() => {
+          setIsOpen(true);
+          setActiveIndex(0);
+        }}
+        onBlur={() => {
+          setTimeout(() => setIsOpen(false), 120);
+        }}
+        onChange={(e) => {
+          onValueChange(e.target.value);
+          setIsOpen(true);
+          setActiveIndex(0);
+        }}
+        onKeyDown={handleKeyDown}
+      />
+
+      {isOpen && !disabled && (
+        <ul id={`${id}-listbox`} className={styles.comboboxList} role="listbox">
+          {options.length ? (
+            options.map((option, index) => (
+              <li key={option.id} role="option" aria-selected={index === activeIndex}>
+                <button
+                  type="button"
+                  className={`${styles.comboboxOption} ${index === activeIndex ? styles.comboboxOptionActive : ""}`}
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    onSelect(option);
+                    setIsOpen(false);
+                  }}
+                  onMouseEnter={() => setActiveIndex(index)}
+                >
+                  {option.label}
+                </button>
+              </li>
+            ))
+          ) : (
+            <li className={styles.comboboxEmpty}>{noResultsText}</li>
+          )}
+        </ul>
+      )}
+    </div>
+  );
+}
+
 export default function EvaluarPage() {
   const [selectedTeacherId, setSelectedTeacherId] = useState("");
   const [selectedSeccionId, setSelectedSeccionId] = useState("");
+  const [teacherQuery, setTeacherQuery] = useState("");
+  const [seccionQuery, setSeccionQuery] = useState("");
   const [answers, setAnswers] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -141,6 +249,21 @@ export default function EvaluarPage() {
     selectedSeccionId &&
     Object.keys(answers).length === questions.length;
 
+  const filteredTeachers = teachersOrdered
+    .filter((teacher) => teacher.name.toLowerCase().includes(teacherQuery.toLowerCase()))
+    .map((teacher) => ({
+      id: String(teacher.id),
+      label: teacher.name,
+    }));
+  const filteredSecciones = seccionesOrdered
+    .filter((seccion) =>
+      `${seccion.name} ${seccion.nrc}`.toLowerCase().includes(seccionQuery.toLowerCase())
+    )
+    .map((seccion) => ({
+      id: String(seccion.id),
+      label: `${seccion.name} · NRC ${seccion.nrc}`,
+    }));
+
   const handleAnswer = (questionId, value) => {
     setAnswers((prev) => ({ ...prev, [questionId]: value }));
   };
@@ -150,13 +273,6 @@ export default function EvaluarPage() {
     if (canSubmit) {
       setIsSubmitted(true);
     }
-  };
-
-  const handleReset = () => {
-    setSelectedTeacherId("");
-    setSelectedSeccionId("");
-    setAnswers({});
-    setIsSubmitted(false);
   };
 
   if (isSubmitted) {
@@ -208,46 +324,51 @@ export default function EvaluarPage() {
               <label className={styles.label} htmlFor="teacher">
                 Selecciona tu profesor/a
               </label>
-              <select
+              <Combobox
                 id="teacher"
-                className={styles.select}
-                value={selectedTeacherId}
-                onChange={(e) => {
-                  setSelectedTeacherId(e.target.value);
+                value={teacherQuery}
+                placeholder="Escribe para buscar profesor"
+                options={filteredTeachers}
+                noResultsText="No hay profesores que coincidan"
+                onValueChange={(query) => {
+                  setTeacherQuery(query);
+                  setSelectedTeacherId("");
                   setSelectedSeccionId("");
+                  setSeccionQuery("");
                 }}
-              >
-                <option value="">Elige un profesor</option>
-                {teachersOrdered.map((teacher) => (
-                  <option key={teacher.id} value={teacher.id}>
-                    {teacher.name}
-                  </option>
-                ))}
-              </select>
+                onSelect={(option) => {
+                  setTeacherQuery(option.label);
+                  setSelectedTeacherId(option.id);
+                  setSelectedSeccionId("");
+                  setSeccionQuery("");
+                }}
+              />
             </div>
 
             <div className={styles.fieldGroup}>
               <label className={styles.label} htmlFor="materia">
                 Selecciona la materia
               </label>
-              <select
+              <Combobox
                 id="materia"
-                className={styles.select}
-                value={selectedSeccionId}
-                onChange={(e) => setSelectedSeccionId(e.target.value)}
+                value={seccionQuery}
+                options={filteredSecciones}
+                placeholder={
+                  selectedTeacherId
+                    ? "Escribe para buscar materia"
+                    : "Primero selecciona un profesor"
+                }
+                onValueChange={(query) => {
+                  setSeccionQuery(query);
+                  setSelectedSeccionId("");
+                }}
+                onSelect={(option) => {
+                  setSeccionQuery(option.label);
+                  setSelectedSeccionId(option.id);
+                }}
+                noResultsText="No hay materias que coincidan"
                 disabled={!selectedTeacherId}
-              >
-                <option value="">
-                  {selectedTeacherId
-                    ? "Elige una materia"
-                    : "Primero selecciona un profesor"}
-                </option>
-                {seccionesOrdered.map((seccion) => (
-                  <option key={seccion.id} value={seccion.id}>
-                    {seccion.name} · NRC {seccion.nrc}
-                  </option>
-                ))}
-              </select>
+              />
             </div>
 
             <div className={styles.questionsSection}>
