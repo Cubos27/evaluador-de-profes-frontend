@@ -3,34 +3,64 @@
 import { useState } from "react";
 import Link from "next/link";
 import styles from "./page.module.css";
+import { ArrowLeftIcon, CheckIcon, HomeIcon, SendIcon } from "@/components/icons";
 
-const campuses = [
-  { id: 1, name: "Campus Central" },
-  { id: 2, name: "Campus Norte" },
-  { id: 3, name: "Campus Sur" },
-  { id: 4, name: "Campus Oriente" },
-];
-
-const mockTeachers = {
-  1: [
-    { id: 1, name: "Dra. María González" },
-    { id: 2, name: "Dr. Carlos Ramírez" },
-    { id: 3, name: "Mtra. Ana López" },
-  ],
-  2: [
-    { id: 4, name: "Dr. Juan Pérez" },
-    { id: 5, name: "Mtra. Sofia Hernández" },
-  ],
-  3: [
-    { id: 6, name: "Dr. Roberto Díaz" },
-    { id: 7, name: "Mtra. Elena Vargas" },
-    { id: 8, name: "Dr. Miguel Torres" },
-  ],
-  4: [
-    { id: 9, name: "Mtra. Patricia Ruiz" },
-    { id: 10, name: "Dr. Francisco Morales" },
-  ],
-};
+const mockTeachersResults = [
+  {
+    "name": "Hector Joaquin Escobar Cuevas",
+    "id": 1,
+    "secciones": [
+      {
+        "name": "D12",
+        "nrc": "12345",
+        "cupos": 30,
+        "id": 1
+      },
+      {
+        "name": "D11",
+        "nrc": "22346",
+        "cupos": 30,
+        "id": 5
+      },
+      {
+        "name": "D10",
+        "nrc": "123450",
+        "cupos": 30,
+        "id": 4
+      }
+    ]
+  },
+  {
+    "name": "Norma Elva Espino Rojas",
+    "id": 2,
+    "secciones": [
+      {
+        "name": "D13",
+        "nrc": "12346",
+        "cupos": 30,
+        "id": 2
+      },
+      {
+        "name": "BD13",
+        "nrc": "112346",
+        "cupos": 30,
+        "id": 6
+      }
+    ]
+  },
+  {
+    "name": "Emanuel Jose Avila Vazquez",
+    "id": 3,
+    "secciones": [
+      {
+        "name": "D14",
+        "nrc": "12347",
+        "cupos": 30,
+        "id": 3
+      }
+    ]
+  },
+]
 
 const questions = [
   {
@@ -48,78 +78,68 @@ const questions = [
     id: 2,
     text: "¿Qué tan disponible está el profesor/a para resolver dudas?",
     scale: [
-      { value: 1, label: "Muy mala" },
-      { value: 2, label: "Mala" },
-      { value: 3, label: "Regular" },
-      { value: 4, label: "Buena" },
-      { value: 5, label: "Excelente" },
+      { value: 1, label: "Nunca" },
+      { value: 2, label: "Ocasionalmente" },
+      { value: 3, label: "A veces" },
+      { value: 4, label: "Frecuentemente" },
+      { value: 5, label: "Siempre" },
     ],
   },
   {
     id: 3,
-    text: "¿El profesor/a fomenta la participación y el pensamiento crítico?",
+    text: "¿El profesor/a fomenta el pensamiento crítico?",
     scale: [
-      { value: 1, label: "Muy mala" },
-      { value: 2, label: "Mala" },
-      { value: 3, label: "Regular" },
-      { value: 4, label: "Buena" },
-      { value: 5, label: "Excelente" },
+      { value: 1, label: "Nunca" },
+      { value: 2, label: "Ocasionalmente" },
+      { value: 3, label: "A veces" },
+      { value: 4, label: "Frecuentemente" },
+      { value: 5, label: "Siempre" },
     ],
   },
   {
     id: 4,
+    text: "¿El profesor/a fomenta la participación de los estudiantes?",
+    scale: [
+      { value: 1, label: "Nunca" },
+      { value: 2, label: "Ocasionalmente" },
+      { value: 3, label: "A veces" },
+      { value: 4, label: "Frecuentemente" },
+      { value: 5, label: "Siempre" },
+    ],
+  },
+  {
+    id: 5,
     text: "¿Qué tan justas son las formas de evaluación del profesor/a?",
     scale: [
-      { value: 1, label: "Muy mala" },
-      { value: 2, label: "Mala" },
-      { value: 3, label: "Regular" },
-      { value: 4, label: "Buena" },
-      { value: 5, label: "Excelente" },
+      { value: 1, label: "Muy malas" },
+      { value: 2, label: "Malas" },
+      { value: 3, label: "Regulares" },
+      { value: 4, label: "Buenas" },
+      { value: 5, label: "Excelentes" },
     ],
   },
 ];
 
-function ArrowLeftIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M19 12H5M12 19l-7-7 7-7" />
-    </svg>
-  );
-}
-
-function CheckIcon() {
-  return (
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-      <path d="M20 6L9 17l-5-5" />
-    </svg>
-  );
-}
-
-function SendIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
-    </svg>
-  );
-}
-
-function HomeIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-      <path d="M9 22V12h6v10" />
-    </svg>
-  );
-}
-
 export default function EvaluarPage() {
-  const [selectedCampus, setSelectedCampus] = useState("");
-  const [selectedTeacher, setSelectedTeacher] = useState("");
+  const [selectedTeacherId, setSelectedTeacherId] = useState("");
+  const [selectedSeccionId, setSelectedSeccionId] = useState("");
   const [answers, setAnswers] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const teachers = selectedCampus ? mockTeachers[selectedCampus] || [] : [];
-  const canSubmit = selectedCampus && selectedTeacher && Object.keys(answers).length === questions.length;
+  const teachersOrdered = [...mockTeachersResults].sort((a, b) =>
+    a.name.localeCompare(b.name, "es")
+  );
+  const selectedTeacher = mockTeachersResults.find(
+    (t) => String(t.id) === String(selectedTeacherId)
+  );
+  const seccionesOrdered = selectedTeacher
+    ? [...selectedTeacher.secciones].sort((a, b) => a.name.localeCompare(b.name, "es"))
+    : [];
+
+  const canSubmit =
+    selectedTeacherId &&
+    selectedSeccionId &&
+    Object.keys(answers).length === questions.length;
 
   const handleAnswer = (questionId, value) => {
     setAnswers((prev) => ({ ...prev, [questionId]: value }));
@@ -133,8 +153,8 @@ export default function EvaluarPage() {
   };
 
   const handleReset = () => {
-    setSelectedCampus("");
-    setSelectedTeacher("");
+    setSelectedTeacherId("");
+    setSelectedSeccionId("");
     setAnswers({});
     setIsSubmitted(false);
   };
@@ -155,7 +175,7 @@ export default function EvaluarPage() {
               </div>
               <h2 className={styles.successTitle}>¡Evaluación enviada!</h2>
               <p className={styles.successText}>
-                Gracias por tu retroalimentación. Tu opinión ayuda a mejorar la calidad educativa.
+                Gracias por tu retroalimentación. Tu opinión ayuda a todos los estudiantes.
               </p>
               <Link href="/" className={styles.backHomeBtn}>
                 <HomeIcon /> Volver al inicio
@@ -180,32 +200,10 @@ export default function EvaluarPage() {
         <div className={styles.formContainer}>
           <h1 className={styles.formTitle}>Evalúa a tu profesor</h1>
           <p className={styles.formSubtitle}>
-            Tu opinión es匿名 y nos ayuda a mejorar la calidad educativa.
+            Tu opinión es anónima y nos ayuda a todos los estudiantes.
           </p>
 
           <form className={styles.form} onSubmit={handleSubmit}>
-            <div className={styles.fieldGroup}>
-              <label className={styles.label} htmlFor="campus">
-                Selecciona tu campus
-              </label>
-              <select
-                id="campus"
-                className={styles.select}
-                value={selectedCampus}
-                onChange={(e) => {
-                  setSelectedCampus(e.target.value);
-                  setSelectedTeacher("");
-                }}
-              >
-                <option value="">Elige un campus</option>
-                {campuses.map((campus) => (
-                  <option key={campus.id} value={campus.id}>
-                    {campus.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-
             <div className={styles.fieldGroup}>
               <label className={styles.label} htmlFor="teacher">
                 Selecciona tu profesor/a
@@ -213,16 +211,40 @@ export default function EvaluarPage() {
               <select
                 id="teacher"
                 className={styles.select}
-                value={selectedTeacher}
-                onChange={(e) => setSelectedTeacher(e.target.value)}
-                disabled={!selectedCampus}
+                value={selectedTeacherId}
+                onChange={(e) => {
+                  setSelectedTeacherId(e.target.value);
+                  setSelectedSeccionId("");
+                }}
               >
-                <option value="">
-                  {selectedCampus ? "Elige un profesor" : "Primero selecciona un campus"}
-                </option>
-                {teachers.map((teacher) => (
+                <option value="">Elige un profesor</option>
+                {teachersOrdered.map((teacher) => (
                   <option key={teacher.id} value={teacher.id}>
                     {teacher.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className={styles.fieldGroup}>
+              <label className={styles.label} htmlFor="materia">
+                Selecciona la materia
+              </label>
+              <select
+                id="materia"
+                className={styles.select}
+                value={selectedSeccionId}
+                onChange={(e) => setSelectedSeccionId(e.target.value)}
+                disabled={!selectedTeacherId}
+              >
+                <option value="">
+                  {selectedTeacherId
+                    ? "Elige una materia"
+                    : "Primero selecciona un profesor"}
+                </option>
+                {seccionesOrdered.map((seccion) => (
+                  <option key={seccion.id} value={seccion.id}>
+                    {seccion.name} · NRC {seccion.nrc}
                   </option>
                 ))}
               </select>
