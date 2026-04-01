@@ -2,7 +2,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 48px;
+  padding: 0px 48px;
+  height: 10vh;
   position: sticky;
   top: 0;
   background: #ffffff;

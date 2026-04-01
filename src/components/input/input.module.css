@@ -1,0 +1,55 @@
+.inputWrapper {
+  margin-bottom: 24px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: var(--grey-olive);
+  font-weight: 500;
+}
+
+.inputField {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px 20px;
+  border: 2px solid var(--silver);
+  border-radius: 12px;
+  font-size: 16px;
+  background: #ffffff;
+  color: var(--charcoal-brown);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  appearance: none; /* Elimina estilos nativos */
+}
+
+/* Aplicando estilos de focus consistentes */
+.inputField:focus {
+  outline: none;
+  border-color: var(--charcoal-brown);
+  box-shadow: 0 0 0 4px rgba(37, 41, 28, 0.1);
+}
+
+/* Aplicando estilos de disabled consistentes */
+.inputField:disabled {
+  background-color: var(--beige);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Estilo adicional para inputs con error */
+.inputFieldError {
+  border-color: #ff4d4f; /* Un color de error estándar */
+}
+
+.inputFieldError:focus {
+  border-color: #ff4d4f;
+  box-shadow: 0 0 0 4px rgba(255, 77, 79, 0.1);
+}
+
+.errorMessage {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  color: #ff4d4f;
+}

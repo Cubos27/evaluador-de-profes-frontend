@@ -14,7 +14,7 @@ export default function Header() {
         </Link>
         <nav className={styles.nav}>
           <Link href="/profesores" className={styles.navLink}>Estadísticas de profesores</Link>
-          <Link href="/" className={styles.navLink}>Iniciar sesión</Link>
+          <Link href="/auth" className={styles.navLink}>Iniciar sesión</Link>
           <Link href="/evaluar" className={styles.navLink}>
             <PrimaryBtn>
               Comenzar ahora
