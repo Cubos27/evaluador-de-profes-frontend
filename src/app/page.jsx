@@ -16,24 +16,6 @@ import {
 export default function Home() {
   return (
     <div className={styles.container}>
-      <header className={styles.header}>
-        <div className={styles.logo}>
-          <div className={styles.logoIcon}>
-            <StarIcon />
-          </div>
-          EvaluaProfe
-        </div>
-        <nav className={styles.nav}>
-          <Link href="#features" className={styles.navLink}>Características</Link>
-          <Link href="#como-funciona" className={styles.navLink}>Cómo funciona</Link>
-          <Link href="/evaluar" className={styles.navLink}>
-            <PrimaryBtn>
-              Comenzar ahora
-            </PrimaryBtn>
-          </Link>
-        </nav>
-      </header>
-
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <h1 className={styles.heroTitle}>

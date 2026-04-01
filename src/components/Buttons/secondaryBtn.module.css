@@ -1,4 +1,7 @@
 .secondaryBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: transparent;
   color: var(--charcoal-brown);
   padding: 16px 32px;

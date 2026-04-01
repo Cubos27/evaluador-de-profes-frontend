@@ -3,6 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import styles from "./page.module.css";
+import PrimaryBtn from "@/components/buttons/primaryBtn";
+import SecondaryBtn from "@/components/buttons/secondaryBtn";
+import Combobox from "@/components/comboBox/comboBox";
 import { ArrowLeftIcon, CheckIcon, HomeIcon, SendIcon } from "@/components/icons";
 
 const mockTeachersResults = [
@@ -120,112 +123,6 @@ const questions = [
   },
 ];
 
-function Combobox({
-  id,
-  value,
-  onValueChange,
-  options,
-  onSelect,
-  placeholder,
-  disabled = false,
-  noResultsText = "Sin resultados",
-}) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const handleKeyDown = (e) => {
-    if (!isOpen && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
-      setIsOpen(true);
-      return;
-    }
-
-    if (!options.length) {
-      if (e.key === "Escape") {
-        setIsOpen(false);
-      }
-      return;
-    }
-
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      setActiveIndex((prev) => (prev + 1) % options.length);
-    }
-
-    if (e.key === "ArrowUp") {
-      e.preventDefault();
-      setActiveIndex((prev) => (prev - 1 + options.length) % options.length);
-    }
-
-    if (e.key === "Enter") {
-      e.preventDefault();
-      const option = options[activeIndex];
-      if (option) {
-        onSelect(option);
-        setIsOpen(false);
-      }
-    }
-
-    if (e.key === "Escape") {
-      setIsOpen(false);
-    }
-  };
-
-  return (
-    <div className={styles.comboboxWrapper}>
-      <input
-        id={id}
-        className={styles.select}
-        type="text"
-        value={value}
-        placeholder={placeholder}
-        disabled={disabled}
-        role="combobox"
-        aria-expanded={isOpen}
-        aria-controls={`${id}-listbox`}
-        aria-autocomplete="list"
-        onFocus={() => {
-          setIsOpen(true);
-          setActiveIndex(0);
-        }}
-        onBlur={() => {
-          setTimeout(() => setIsOpen(false), 120);
-        }}
-        onChange={(e) => {
-          onValueChange(e.target.value);
-          setIsOpen(true);
-          setActiveIndex(0);
-        }}
-        onKeyDown={handleKeyDown}
-      />
-
-      {isOpen && !disabled && (
-        <ul id={`${id}-listbox`} className={styles.comboboxList} role="listbox">
-          {options.length ? (
-            options.map((option, index) => (
-              <li key={option.id} role="option" aria-selected={index === activeIndex}>
-                <button
-                  type="button"
-                  className={`${styles.comboboxOption} ${index === activeIndex ? styles.comboboxOptionActive : ""}`}
-                  onMouseDown={(e) => {
-                    e.preventDefault();
-                    onSelect(option);
-                    setIsOpen(false);
-                  }}
-                  onMouseEnter={() => setActiveIndex(index)}
-                >
-                  {option.label}
-                </button>
-              </li>
-            ))
-          ) : (
-            <li className={styles.comboboxEmpty}>{noResultsText}</li>
-          )}
-        </ul>
-      )}
-    </div>
-  );
-}
-
 export default function EvaluarPage() {
   const [selectedTeacherId, setSelectedTeacherId] = useState("");
   const [selectedSeccionId, setSelectedSeccionId] = useState("");
@@ -278,11 +175,6 @@ export default function EvaluarPage() {
   if (isSubmitted) {
     return (
       <div className={styles.container}>
-        <header className={styles.header}>
-          <Link href="/" className={styles.backLink}>
-            <ArrowLeftIcon /> Volver al inicio
-          </Link>
-        </header>
         <main className={styles.main}>
           <div className={styles.formContainer}>
             <div className={styles.successMessage}>
@@ -293,8 +185,10 @@ export default function EvaluarPage() {
               <p className={styles.successText}>
                 Gracias por tu retroalimentación. Tu opinión ayuda a todos los estudiantes.
               </p>
-              <Link href="/" className={styles.backHomeBtn}>
-                <HomeIcon /> Volver al inicio
+              <Link href="/profesores" className={styles.backHomeBtn}>
+                <PrimaryBtn>
+                  Ver evaluaciones de profesores
+                </PrimaryBtn>
               </Link>
             </div>
           </div>
@@ -305,13 +199,6 @@ export default function EvaluarPage() {
 
   return (
     <div className={styles.container}>
-      <header className={styles.header}>
-        <Link href="/" className={styles.backLink}>
-          <ArrowLeftIcon /> Volver al inicio
-        </Link>
-        <span className={styles.logo}>EvaluaProfe</span>
-      </header>
-
       <main className={styles.main}>
         <div className={styles.formContainer}>
           <h1 className={styles.formTitle}>Evalúa a tu profesor</h1>

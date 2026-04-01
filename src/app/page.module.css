@@ -4,60 +4,6 @@
   flex-direction: column;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 48px;
-  position: sticky;
-  top: 0;
-  background: #ffffff;
-  z-index: 100;
-  box-shadow: 0 2px 8px rgba(37, 41, 28, 0.05);
-}
-
-.logo {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--charcoal-brown);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.logoIcon {
-  width: 32px;
-  height: 32px;
-  background: var(--charcoal-brown);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.logoIcon svg {
-  width: 20px;
-  height: 20px;
-  color: var(--vanilla-custard);
-}
-
-.nav {
-  display: flex;
-  gap: 32px;
-  align-items: center;
-}
-
-.navLink {
-  font-weight: 500;
-  color: var(--charcoal-brown);
-  transition: all ease-in-out 0.2s;
-}
-
-.navLink:hover {
-  color: var(--vanilla-custard);
-  /* opacity: 0.7; */
-}
-
 .hero {
   flex: 1;
   display: grid;

@@ -5,41 +5,6 @@
   background: #ffffff;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 48px;
-  background: #ffffff;
-  box-shadow: 0 2px 8px rgba(37, 41, 28, 0.05);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.backLink {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--charcoal-brown);
-  font-weight: 500;
-  transition: opacity 0.2s;
-  padding: 8px 16px;
-  border-radius: 8px;
-  border: 1px solid var(--silver);
-}
-
-.backLink:hover {
-  background: var(--beige);
-  opacity: 1;
-}
-
-.logo {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--charcoal-brown);
-}
-
 .main {
   flex: 1;
   display: flex;
@@ -89,82 +54,6 @@
   font-weight: 600;
   color: var(--charcoal-brown);
   font-size: 16px;
-}
-
-.select {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 16px 20px;
-  border: 2px solid var(--silver);
-  border-radius: 12px;
-  font-size: 16px;
-  background: #ffffff;
-  color: var(--charcoal-brown);
-  cursor: pointer;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2325291cff' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 16px center;
-  background-size: 20px;
-  padding-right: 48px;
-}
-
-.select:focus {
-  outline: none;
-  border-color: var(--charcoal-brown);
-  box-shadow: 0 0 0 4px rgba(37, 41, 28, 0.1);
-}
-
-.select:disabled {
-  background-color: var(--beige);
-  cursor: not-allowed;
-  opacity: 0.7;
-}
-
-.comboboxWrapper {
-  position: relative;
-  width: 100%;
-}
-
-.comboboxList {
-  position: absolute;
-  z-index: 30;
-  width: 100%;
-  box-sizing: border-box;
-  list-style: none;
-  margin: 6px 0 0 0;
-  max-height: 240px;
-  overflow-y: auto;
-  border: 1px solid var(--silver);
-  border-radius: 12px;
-  background: #ffffff;
-  box-shadow: 0 8px 24px rgba(37, 41, 28, 0.15);
-  padding: 6px;
-}
-
-.comboboxOption {
-  display: block;
-  width: 100%;
-  text-align: left;
-  background: transparent;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 12px;
-  color: var(--charcoal-brown);
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.comboboxOption:hover,
-.comboboxOptionActive {
-  background: var(--beige);
-}
-
-.comboboxEmpty {
-  color: var(--grey-olive);
-  font-size: 14px;
-  padding: 10px 12px;
 }
 
 .questionsSection {
